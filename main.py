@@ -1,3 +1,5 @@
+import argparse
+
 def get_book_contents(file_path):
     with open(file_path) as file:
         return file.read()
@@ -32,7 +34,12 @@ def format_letter_counts(letter_counts):
     return count_list
 
 def main():
-    book_path = "books/frankenstein.txt"
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', required=True, dest="file", type=str, help='file path (Required)')
+
+    args = parser.parse_args()
+    
+    book_path = args.file
     book_contents = get_book_contents(book_path)
 
     word_count = get_word_count(book_contents)
